@@ -9,6 +9,8 @@
 #define SRC_LSM303DLHC_H_
 
 #include "../I2C/I2CDevice.h"
+
+#define MICRO_SECOND = 1000000
 /*
  * REGISTER ADDRESS
  */
@@ -343,7 +345,7 @@ public:
     /**
      \brief BBBLSM303DLHC : A class that provides control of the BBBLSM303DLHC's accelerometer, magnetometer, temp and gyro.
      */
-    LSM303DLHC( ){ };
+    LSM303DLHC( );
 
     void LoadRecommendedFlightSettings( );
 
@@ -369,6 +371,18 @@ public:
 
     uint8_t GetClickSRCSettings( ){ return this->ClickSRCSettings; }
 
+    uint8_t GetOutputDataRate( );
+
+    void SetDataTimer( );
+
+    short GetX( );
+
+    short GetY( );
+
+    short GetZ( );
+
+    int DataTimer;
+
 protected:
 
     void SetDeviceAddress( unsigned char _DeviceAddress ) { this->DeviceAddress = _DeviceAddress; }
@@ -378,7 +392,6 @@ protected:
 private:
 
     uint8_t CommitSetting( uint8_t RegisterAddress, uint8_t RegisterValue );
-
     uint8_t PowerSettings;
     uint8_t HighPassSettings;
     uint8_t Int1Settings;
