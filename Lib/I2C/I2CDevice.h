@@ -173,15 +173,15 @@ namespace I2C {
 
         const char * DeviceBusPath;
 
+        unsigned char DeviceAddress;
         unsigned char RegisterValue;
         unsigned char RegisterAddress;
 
         char ReadAndWriteBuffer[ TWO_BYTES ];
         char WriteBufferOnly[ ONE_BYTE ];
-        char ErrMessage[ MAX_BUFF ];
 
+        char ErrMessage[ MAX_BUFF ];
         int FileHandle;
-        int DeviceAddress;
         int BusId;
 
         bool DeviceInitialised;
