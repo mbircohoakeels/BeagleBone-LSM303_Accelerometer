@@ -7,7 +7,7 @@
 namespace I2C {
 
     I2CDevice::I2CDevice( ) {
-        this->DeviceAddress = 0;
+        this->DeviceAddress = 0x00;
         this->BusId = 0;
         this->DeviceInitialised = false;
     }
