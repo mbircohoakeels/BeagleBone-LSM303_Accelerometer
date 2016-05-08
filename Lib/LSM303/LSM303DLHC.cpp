@@ -2,6 +2,7 @@
 // Created by Michael Brookes on 05/05/2016.
 //
 
+#include <bitset>
 #include "./LSM303DLHC.h"
 
 using namespace I2C;
@@ -146,9 +147,44 @@ void LSM303DLHC::LoadRecommendedFlightSettings( ) {
 
 }
 
+LSM303DLHC::LSM303DLHC( ) {
+
+}
+
 uint8_t LSM303DLHC::CommitSetting( uint8_t RegisterAddress, uint8_t RegisterValue ){
     this->SetRegisterAddress( RegisterAddress );
     this->SetRegisterValue( RegisterValue );
     this->WriteToDevice( 2 );
     return RegisterValue;
+}
+
+short LSM303DLHC::GetX( ) {
+    return (this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_X_H_A : OUT_X_H_M ) ) << 8 ) |
+            this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_X_L_A : OUT_X_L_M ) );
+}
+
+short LSM303DLHC::GetY( ) {
+    return (this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Y_H_A : OUT_Y_H_M ) ) << 8 ) |
+            this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Y_L_A : OUT_Y_L_M ) );
+}
+
+short LSM303DLHC::GetZ( ) {
+    return (this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Z_H_A : OUT_Z_H_M ) ) << 8 ) |
+            this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Z_L_A : OUT_Z_L_M ) );
+}
+
+uint8_t LSM303DLHC::GetOutputDataRate( ) {
+    return uint8_t( ( this->GetPowerSettings( ) >> 4 ) & 7 ); //bits required 0`000`0000 >> 4 = 00000`000` & 7 (00000111) = val of the 3 bits
+}
+
+void LSM303DLHC::SetDataTimer( ) {
+    switch( this->GetOutputDataRate( ) << 4 ) {
+        case ODR_10HZ : this->DataTimer = 1000000/10; break; //1MHz = 1000000 Micro Seconds
+        case ODR_25HZ : this->DataTimer = 1000000/25; break;
+        case ODR_50HZ : this->DataTimer = 1000000/50; break;
+        case ODR_100HZ : this->DataTimer = 1000000/100; break;
+        case ODR_200HZ : this->DataTimer = 1000000/200; break;
+        case ODR_400HZ : this->DataTimer = 1000000/400; break;
+        default : this->DataTimer = 1000000;
+    }
 }
