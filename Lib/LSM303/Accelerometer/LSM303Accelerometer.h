@@ -7,7 +7,6 @@
 
 
 #include "../LSM303DLHC.h"
-//#include "../Orientation/Orientation.h"
 #include <bitset>
 
 using namespace std;
@@ -16,13 +15,11 @@ class LSM303Accelerometer : public LSM303DLHC {
 
 public:
 
-    LSM303Accelerometer( unsigned char _DeviceAddress, int _BusId );
+    LSM303Accelerometer( unsigned char _DeviceAddress = ACCEL_ADDRESS, int _BusId = 1 );
 
-    //Orientation *Position;
-
-    //void SetX( );
-    //void SetY( );
-    //void SetZ( );
+    short X( );
+    short Y( );
+    short Z( );
 
 private:
 
