@@ -371,23 +371,17 @@ public:
 
     uint8_t GetClickSRCSettings( ){ return this->ClickSRCSettings; }
 
-    uint8_t GetOutputDataRate( );
+    short X, Y, Z;
 
-    void SetDataTimer( );
-
-    short GetX( );
-
-    short GetY( );
-
-    short GetZ( );
-
-    int DataTimer;
+    unsigned int DataTimer;
 
 protected:
 
     void SetDeviceAddress( unsigned char _DeviceAddress ) { this->DeviceAddress = _DeviceAddress; }
 
     void SetBusId( int _BusId ) { this->BusId = _BusId; }
+
+    void InitAccelerometer( );
 
 private:
 
@@ -403,6 +397,39 @@ private:
     uint8_t Interrupt2CFGSettings;
     uint8_t ClickCFGSettings;
     uint8_t ClickSRCSettings;
+
+    void StartRecording( );
+
+    static void* RecordAllValues(  void *_LSM303  );
+
+    void SetDataTimer( );
+
+    void SetAccelerometerTimerBasedOnODR( );
+
+    void SetMagnetometerTimerBasedOnDO( );
+
+    short GetX( );
+
+    short GetY( );
+
+    short GetZ( );
+
+    void SetX( );
+
+    void SetY( );
+
+    void SetZ( );
+
+    uint8_t GetOutputDataRate( );
+
+    bool XAxisIsEnabled( );
+
+    bool YAxisIsEnabled( );
+
+    bool ZAxisIsEnabled( );
+
+    pthread_t LSM303Thread;
+
 };
 
 #endif /* SRC_LSM303DLHC_H_ */
