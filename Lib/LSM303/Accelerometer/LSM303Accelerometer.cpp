@@ -7,7 +7,7 @@
 LSM303Accelerometer::LSM303Accelerometer( unsigned char _DeviceAddress, int _BusId ) {
     this->SetDeviceAddress( _DeviceAddress );
     this->SetBusId( _BusId );
-    this->InitDevice( );
+    this->InitAccelerometer( );
 }
 
 short LSM303Accelerometer::X( ) {
