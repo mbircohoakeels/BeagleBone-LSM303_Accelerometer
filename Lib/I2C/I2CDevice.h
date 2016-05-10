@@ -46,7 +46,7 @@ namespace I2C {
          \fn Public InitDevice
          \brief Requires the device address and bus id to be configured.
          */
-        void InitDevice( ) throw( I2CSetupException& );
+        void InitI2C( ) throw( I2CSetupException& );
 
         /**
          \fn Public GetValueFromRegister
