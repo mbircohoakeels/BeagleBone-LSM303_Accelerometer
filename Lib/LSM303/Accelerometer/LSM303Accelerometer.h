@@ -17,10 +17,6 @@ public:
 
     LSM303Accelerometer( unsigned char _DeviceAddress = ACCEL_ADDRESS, int _BusId = 1 );
 
-    short X( );
-    short Y( );
-    short Z( );
-
 private:
 
 };

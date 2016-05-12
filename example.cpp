@@ -10,20 +10,12 @@ int main( ) {
 
     Accelerometer = new LSM303Accelerometer( );
 
-    Accelerometer->LoadRecommendedFlightSettings( );
-
-    Accelerometer->SetDataTimer( );
-
-    //while( 1 ) {
-        Accelerometer->X( );
-        Accelerometer->Y( );
-        Accelerometer->Z( );
-
+    while( 1 ) {
         cout << "Refresh Rate = " << Accelerometer->DataTimer << endl;
-        //cout << "X = " << bitset<16>( Accelerometer->Position->X ) << " = " << Accelerometer->Position->X << endl;
-        //cout << "Y = " << bitset<16>( Accelerometer->Position->Y ) << endl;
-        //cout << "Z = " << bitset<16>( Accelerometer->Position->Z ) << endl;
-        //usleep( 5000 );
-    //}
+        cout << "X = " << Accelerometer->X << endl;
+        cout << "Y = " << Accelerometer->Y << endl;
+        cout << "Z = " << Accelerometer->Z << endl;
+        usleep( Accelerometer->DataTimer + 1000000 );
+    }
     return 0;
 }

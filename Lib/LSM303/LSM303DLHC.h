@@ -331,7 +331,7 @@
  */
 
 /**
- \brief BBBLSM303DLHC : Abstract class that provides control of the BBBLSM303DLHC, inherits I2C methods.
+ \brief LSM303DLHC : Base class that provides control of the BBBLSM303DLHC, inherits I2C methods.
  \version   2.3
  \date      Oct-2015
  \copyright GNU Public License.
@@ -371,6 +371,12 @@ public:
 
     uint8_t GetClickSRCSettings( ){ return this->ClickSRCSettings; }
 
+    uint8_t GetCRARegMSettings( ){ return this->CRARegMSettings; }
+
+    uint8_t GetMRRegMSettings( ){ return this->MRRegMSettings; }
+
+    void InitAccelerometer( );
+
     short X, Y, Z;
 
     unsigned int DataTimer;
@@ -381,7 +387,6 @@ protected:
 
     void SetBusId( int _BusId ) { this->BusId = _BusId; }
 
-    void InitAccelerometer( );
 
 private:
 
@@ -397,10 +402,14 @@ private:
     uint8_t Interrupt2CFGSettings;
     uint8_t ClickCFGSettings;
     uint8_t ClickSRCSettings;
+    uint8_t CRARegMSettings;
+    uint8_t MRRegMSettings;
 
     void StartRecording( );
 
-    static void* RecordAllValues(  void *_LSM303  );
+    static void* RecordAccelerometerValues(  void *_LSM303  );
+
+    static void* RecordMagnetometerValues(  void *_LSM303  );
 
     void SetDataTimer( );
 
@@ -422,13 +431,17 @@ private:
 
     uint8_t GetOutputDataRate( );
 
+    uint8_t GetDataOutputRate( );
+
     bool XAxisIsEnabled( );
 
     bool YAxisIsEnabled( );
 
     bool ZAxisIsEnabled( );
 
-    pthread_t LSM303Thread;
+    uint8_t MagnetometerIsEnabled( );
+
+    pthread_t LSM303AccelThread, LSM303MagThread;
 
 };
 
