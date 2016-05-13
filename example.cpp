@@ -3,7 +3,8 @@
 
 using namespace std;
 
-void main( ) {
+int main( ) {
+
     using namespace I2C;
 
     LSM303Accelerometer *Accelerometer;
