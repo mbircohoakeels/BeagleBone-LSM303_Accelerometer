@@ -387,7 +387,6 @@ protected:
 
     void SetBusId( int _BusId ) { this->BusId = _BusId; }
 
-
 private:
 
     uint8_t CommitSetting( uint8_t RegisterAddress, uint8_t RegisterValue );
@@ -405,17 +404,17 @@ private:
     uint8_t CRARegMSettings;
     uint8_t MRRegMSettings;
 
-    void StartRecording( );
-
     static void* RecordAccelerometerValues(  void *_LSM303  );
 
     static void* RecordMagnetometerValues(  void *_LSM303  );
 
-    void SetDataTimer( );
-
     void SetAccelerometerTimerBasedOnODR( );
 
     void SetMagnetometerTimerBasedOnDO( );
+
+    void StartRecording( );
+
+    void SetDataTimer( );
 
     short GetX( );
 
@@ -429,6 +428,8 @@ private:
 
     void SetZ( );
 
+    uint8_t MagnetometerIsEnabled( );
+
     uint8_t GetOutputDataRate( );
 
     uint8_t GetDataOutputRate( );
@@ -438,8 +439,6 @@ private:
     bool YAxisIsEnabled( );
 
     bool ZAxisIsEnabled( );
-
-    uint8_t MagnetometerIsEnabled( );
 
     pthread_t LSM303AccelThread, LSM303MagThread;
 
