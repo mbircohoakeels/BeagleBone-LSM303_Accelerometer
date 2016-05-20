@@ -5,7 +5,7 @@
 #include <bitset>
 #include "./LSM303DLHC.h"
 
-using namespace I2C;
+using namespace abI2C;
 
 void LSM303DLHC::LoadRecommendedFlightSettings( ) {
     if( this->DeviceAddress == ACCEL_ADDRESS ) {
@@ -190,17 +190,17 @@ uint8_t LSM303DLHC::CommitSetting( uint8_t RegisterAddress, uint8_t RegisterValu
 
 short LSM303DLHC::GetX( ) {
     return ( this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_X_H_A : OUT_X_H_M ) ) << 8 ) |
-             this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_X_L_A : OUT_X_L_M ) );
+           this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_X_L_A : OUT_X_L_M ) );
 }
 
 short LSM303DLHC::GetY( ) {
     return (this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Y_H_A : OUT_Y_H_M ) ) << 8 ) |
-            this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Y_L_A : OUT_Y_L_M ) );
+           this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Y_L_A : OUT_Y_L_M ) );
 }
 
 short LSM303DLHC::GetZ( ) {
     return (this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Z_H_A : OUT_Z_H_M ) ) << 8 ) |
-            this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Z_L_A : OUT_Z_L_M ) );
+           this->GetValueFromRegister( ( unsigned char ) ( ( this->DeviceAddress == ACCEL_ADDRESS ) ? OUT_Z_L_A : OUT_Z_L_M ) );
 
 }
 
