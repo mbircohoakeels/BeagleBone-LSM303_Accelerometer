@@ -9,7 +9,7 @@ LSM303Accelerometer::LSM303Accelerometer( unsigned char _DeviceAddress, int _Bus
     this->SetBusId( _BusId );
     this->InitI2C( );
     this->LoadRecommendedFlightSettings( );
-    this->InitAccelerometer( );
+    this->Init( );
     this->StartRecordingPitchAndRoll( );
 }
 

@@ -171,8 +171,12 @@ LSM303DLHC::LSM303DLHC( ) {
 
 }
 
-void LSM303DLHC::InitAccelerometer( ) {
-    this->GetOutputDataRate( );
+void LSM303DLHC::Init( ) {
+    if( this->DeviceAddress == ACCEL_ADDRESS )
+        this->GetOutputDataRate( );
+    else if( this->DeviceAddress == MAG_ADDRESS )
+        this->GetDataOutputRate( );
+
     this->SetDataTimer( );
     this->StartRecording( );
 }
