@@ -13,7 +13,7 @@ void LSM303DLHC::LoadRecommendedFlightSettings( ) {
                 this->CommitSetting(
                         CTRL_REG1_A,
                         SET_CTRL_REG1_A(
-                                ODR_400HZ,
+                                ODR_1344KHZ,
                                 LP_LOW_POWER_DISABLED,
                                 Z_AXIS_ENABLED,
                                 Y_AXIS_ENABLED,
@@ -234,13 +234,14 @@ void LSM303DLHC::SetDataTimer( ) {
 
 void LSM303DLHC::SetAccelerometerTimerBasedOnODR( ) { //ODR = Output Data Rate
     switch( this->GetOutputDataRate( ) << 4 ) {
-        case ODR_10HZ  : this->DataTimer = 1000000 / 10; break; //1Hz = 1000000 Micro Seconds
-        case ODR_25HZ  : this->DataTimer = 1000000 / 25; break;
-        case ODR_50HZ  : this->DataTimer = 1000000 / 50; break;
-        case ODR_100HZ : this->DataTimer = 1000000 / 100; break;
-        case ODR_200HZ : this->DataTimer = 1000000 / 200; break;
-        case ODR_400HZ : this->DataTimer = 1000000 / 400; break;
-        case POWER_OFF : this->DataTimer = 0; break;
+        case ODR_10HZ    : this->DataTimer = 1000000 / 10; break; //1Hz = 1000000 Micro Seconds
+        case ODR_25HZ    : this->DataTimer = 1000000 / 25; break;
+        case ODR_50HZ    : this->DataTimer = 1000000 / 50; break;
+        case ODR_100HZ   : this->DataTimer = 1000000 / 100; break;
+        case ODR_200HZ   : this->DataTimer = 1000000 / 200; break;
+        case ODR_400HZ   : this->DataTimer = 1000000 / 400; break;
+        case ODR_1344KHZ : this->DataTimer = 800; break;
+        case POWER_OFF   : this->DataTimer = 0; break;
         default : this->DataTimer = 1000000;
     }
 }
