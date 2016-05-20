@@ -379,6 +379,13 @@ public:
 
     short X, Y, Z;
 
+    template<typename T>
+    struct vector {
+        T X, Y, Z;
+    };
+
+    vector<short> a;
+
     unsigned int DataTimer;
 
 protected:
