@@ -156,7 +156,7 @@ void LSM303DLHC::LoadRecommendedFlightSettings( ) {
                         )
                 );
 
-        this->CRARegMSettings =
+        this->MRRegMSettings =
                 this->CommitSetting(
                         MR_REG_M,
                         SET_MR_REG_M(
